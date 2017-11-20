@@ -6,8 +6,8 @@ Pycorrelate
 .. image:: https://img.shields.io/pypi/v/pycorrelate.svg
         :target: https://pypi.python.org/pypi/pycorrelate
 
-.. image:: https://img.shields.io/travis/tritemio/pycorrelate.svg
-        :target: https://travis-ci.org/tritemio/pycorrelate
+.. image:: https://img.shields.io/travis/opensmfs/pycorrelate.svg
+        :target: https://travis-ci.org/opensmfs/pycorrelate
 
 .. image:: https://ci.appveyor.com/api/projects/status/dcanybpqi2o1ecwi/branch/master?svg=true
         :target: https://ci.appveyor.com/project/tritemio/pycorrelate/branch/master
