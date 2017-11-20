@@ -9,8 +9,8 @@ Pycorrelate
 .. image:: https://img.shields.io/travis/OpenSMFS/pycorrelate.svg
         :target: https://travis-ci.org/OpenSMFS/pycorrelate
 
-.. image:: https://ci.appveyor.com/api/projects/status/dcanybpqi2o1ecwi/branch/master?svg=true
-        :target: https://ci.appveyor.com/project/tritemio/pycorrelate/branch/master
+.. image:: https://ci.appveyor.com/api/projects/status/72bh25lhqq1t7gp0/branch/master?svg=true
+        :target: https://ci.appveyor.com/project/tritemio/pycorrelate-s45c8/branch/master
 
 .. image:: https://readthedocs.org/projects/pycorrelate/badge/?version=latest
         :target: https://pycorrelate.readthedocs.io/en/latest/?badge=latest
