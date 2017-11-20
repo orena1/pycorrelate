@@ -25,7 +25,7 @@ setup(
     long_description=readme + '\n\n' + history,
     author="Antonino Ingargiola",
     author_email='tritemio@gmail.com',
-    url='https://github.com/tritemio/pycorrelate',
+    url='https://github.com/opensmfs/pycorrelate',
     packages=find_packages(include=['pycorrelate']),
     include_package_data=True,
     install_requires=requirements,
