@@ -136,7 +136,8 @@ def ucorrelate(t, u, maxlag=None):
     Returns:
         Array contained the correlation at different lags.
         The size of this array is equal to the input argument `maxlag`
-        (if defined) or to `min(tx.size, tu.size) - 1`.
+        (if defined) or to `min(tx.size, tu.size) - 1`, and its `dtype`
+        is the same as argument `t`'s.
 
     Example:
 
@@ -152,11 +153,18 @@ def ucorrelate(t, u, maxlag=None):
 
             >>> np.correlate(u, t, mode='full')[t.size - 1:]
             array([2, 3, 0])
+            
+        Also works with other types:
+            >>> t = np.array([1.2, 2.4, 0.5, 0.6])
+            >>> u = np.array([0, 1.2, 1.3])
+            >>> pycorrelate.ucorrelate(t, u)
+            array([3.53, 4.56, 1.56])
+            
     """
     if maxlag is None:
         maxlag = u.size
     maxlag = int(min(u.size, maxlag))
-    C = np.zeros(maxlag, dtype=np.int64)
+    C = np.empty(maxlag, dtype=t.dtype )
     for lag in range(C.size):
         tmax = min(u.size - lag, t.size)
         umax = min(u.size, t.size + lag)
