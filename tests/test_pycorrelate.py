@@ -1,7 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Tests for `pycorrelate` package."""
+"""
+Unit tests for `pycorrelate`.
+
+To run the tests, enter the source folder and run:
+
+$ pytest -v
+
+"""
 
 import pytest
 import h5py
@@ -32,13 +39,12 @@ def data():
     return t, u, unit
 
 
-
 def test_pcorrelate(data):
     """Test pcorrelate algorithm using np.histogram."""
     t, u, unit = data
     n = 10000  # ~ 3s of data
     t, u = t[:n], u[:n]
-    bins = pyc.make_loglags(-6, 0, 20, base=10) / unit
+    bins = pyc.make_loglags(1, 8, 20, base=10, return_int=True)
     nbins = len(bins) - 1
     G = pyc.pcorrelate(t, u, bins)
 
@@ -60,7 +66,7 @@ def test_pcorrelate(data):
 def test_pcorrelate_normalization(data):
     """Test pcorrelate algorithm using np.histogram."""
     t, u, unit = data
-    bins = pyc.make_loglags(-6, 0, 20, base=10) / unit
+    bins = pyc.make_loglags(-6, 0, 20, base=10, return_int=False) / unit
     Gn = pyc.pcorrelate(t, u, bins, normalize=True)
     G = pyc.pcorrelate(t, u, bins, normalize=False)
     Gn2 = pyc.pnormalize(G, t, u, bins)
