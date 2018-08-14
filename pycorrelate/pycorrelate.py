@@ -86,8 +86,6 @@ def pcorrelate(t, u, bins, normalize=False):
     # For each ti, perform binning of (u - ti) and accumulate counts in Y
     for ti in t:
         for k, (tau_min, tau_max) in enumerate(zip(bins[:-1], bins[1:])):
-            #print ('\nbin %d' % k)
-
             if k == 0:
                 j = imin[k]
                 # We start by finding the index of the first `u` element
@@ -153,18 +151,18 @@ def ucorrelate(t, u, maxlag=None):
 
             >>> np.correlate(u, t, mode='full')[t.size - 1:]
             array([2, 3, 0])
-            
+
         Also works with other types:
             >>> t = np.array([1.2, 2.4, 0.5, 0.6])
             >>> u = np.array([0, 1.2, 1.3])
             >>> pycorrelate.ucorrelate(t, u)
             array([3.53, 4.56, 1.56])
-            
+
     """
     if maxlag is None:
         maxlag = u.size
     maxlag = int(min(u.size, maxlag))
-    C = np.empty(maxlag, dtype=t.dtype )
+    C = np.empty(maxlag, dtype=t.dtype)
     for lag in range(C.size):
         tmax = min(u.size - lag, t.size)
         umax = min(u.size, t.size + lag)
@@ -172,7 +170,7 @@ def ucorrelate(t, u, maxlag=None):
     return C
 
 
-def make_loglags(exp_min, exp_max, points_per_base, base=10):
+def make_loglags(exp_min, exp_max, points_per_base, base=10, return_int=True):
     """Make a log-spaced array useful as lag bins for cross-correlation.
 
     This function conveniently creates an arrays on lag-bins to be used
@@ -184,16 +182,28 @@ def make_loglags(exp_min, exp_max, points_per_base, base=10):
         points_per_base (int): number of points per base
             (i.e. in a decade when `base = 10`)
         base (int): base of the exponent. Default 10.
+        return_int (bool): if True (default) convert bin edges to integers
+            to avoid floating point inaccuracies.
 
     Returns:
         Array of log-spaced values with specified range and spacing.
 
     Example:
 
+        Compute log10-spaced bins with 5 bins per decade, starting from 1
+        (10⁰) and stopping at 10⁶::
+
+            >>> make_loglags(0, 6, 5)
+            array([      1,       2,       3,       4,       6,      10,      16,
+                        25,      40,      63,     100,     158,     251,     398,
+                       631,    1000,    1585,    2512,    3981,    6310,   10000,
+                     15849,   25119,   39811,   63096,  100000,  158489,  251189,
+                    398107,  630957, 1000000])
+
         Compute log10-spaced bins with 2 bins per decade, starting
         from 10⁻¹ and stopping at 10³::
 
-            >>> make_loglags(-1, 3, 2)
+            >>> make_loglags(-1, 3, 2, return_int=False)
             array([  1.00000000e-01,   3.16227766e-01,   1.00000000e+00,
                      3.16227766e+00,   1.00000000e+01,   3.16227766e+01,
                      1.00000000e+02,   3.16227766e+02,   1.00000000e+03])
@@ -202,5 +212,7 @@ def make_loglags(exp_min, exp_max, points_per_base, base=10):
         :func:`pcorrelate`
     """
     num_points = points_per_base * (exp_max - exp_min) + 1
-    bins = np.logspace(exp_min, exp_max, num_points, base=base)
+    bins = np.unique(np.logspace(exp_min, exp_max, num_points, base=base))
+    if return_int:
+        bins = np.round(bins).astype('int64')
     return bins
