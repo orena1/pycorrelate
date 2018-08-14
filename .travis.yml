@@ -1,18 +1,22 @@
+sudo: false
 language: python
 
-python:
-    - "3.5"
-    - "3.6"
+env:
+  - PYTHON_VERSION=3.6
+  - PYTHON_VERSION=3.7
 
 before_install:
     - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
     - chmod +x miniconda.sh
     - ./miniconda.sh -b
     - export PATH=/home/travis/miniconda3/bin:$PATH
+    - conda update --yes conda
     - conda config --add channels conda-forge
+    - conda create --yes -n testenv python=$PYTHON_VERSION
+    - source activate testenv
 
 install:
-    - conda install --yes python=$TRAVIS_PYTHON_VERSION pip numba pytest h5py matplotlib lmfit nbconvert ipykernel
+    - conda install --yes pip numba pytest h5py matplotlib lmfit nbconvert ipykernel
     - python setup.py build
     - pip install .
     - rm -rf build/
@@ -21,5 +25,3 @@ script:
     - py.test -v
     - cd docs/notebooks
     - python ../../tests/nbrun.py .
-
-sudo: false
