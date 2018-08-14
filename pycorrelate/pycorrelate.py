@@ -173,8 +173,10 @@ def ucorrelate(t, u, maxlag=None):
 def make_loglags(exp_min, exp_max, points_per_base, base=10, return_int=True):
     """Make a log-spaced array useful as lag bins for cross-correlation.
 
-    This function conveniently creates an arrays on lag-bins to be used
-    with :func:`pcorrelate`.
+    This function creates an arrays of log-spaced time-lag bins to be used
+    with :func:`pcorrelate`. By default it returns integer time-lag bins
+    to avoid floating point inaccuracies in the correlation
+    (showing up as higher noise at small time-lags).
 
     Arguments:
         exp_min (int): exponent of the minimum value
@@ -182,8 +184,9 @@ def make_loglags(exp_min, exp_max, points_per_base, base=10, return_int=True):
         points_per_base (int): number of points per base
             (i.e. in a decade when `base = 10`)
         base (int): base of the exponent. Default 10.
-        return_int (bool): if True (default) convert bin edges to integers
-            to avoid floating point inaccuracies.
+        return_int (bool): if True (default) return integer bin edges
+            to avoid floating point inaccuracies. If False, returned bin
+            edges are float.
 
     Returns:
         Array of log-spaced values with specified range and spacing.
@@ -212,7 +215,8 @@ def make_loglags(exp_min, exp_max, points_per_base, base=10, return_int=True):
         :func:`pcorrelate`
     """
     num_points = points_per_base * (exp_max - exp_min) + 1
-    bins = np.unique(np.logspace(exp_min, exp_max, num_points, base=base))
+    bins = np.logspace(exp_min, exp_max, num_points, base=base)
     if return_int:
-        bins = np.round(bins).astype('int64')
+        # using `unique` because rounding to int may create duplicates
+        bins = np.unique(np.round(bins).astype('int64'))
     return bins
