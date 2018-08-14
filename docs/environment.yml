@@ -2,7 +2,7 @@ name: pycorrelate-dev
 channels:
   - conda-forge
 dependencies:
-- python==3.5
+- python==3.6
 - pandoc
 - h5py
 - numba
@@ -13,8 +13,6 @@ dependencies:
 - ipykernel
 - sphinx>=1.5.1
 - sphinx_rtd_theme
-- tornado
-- entrypoints
 - lmfit
 - pip:
     - nbsphinx>=0.2.12
