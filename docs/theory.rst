@@ -78,7 +78,7 @@ You can choose between the normalized and unnormalized version with the
 input argument `normalize`.
 
 .. note::
-    Due to a typo, in *Laurence 2006*, the expression for *G(k)*
+    In *Laurence 2006*, due to a typo, the expression for *G(k)*
     (which they call :math:`C_{AB}(\tau)`) is missing the term
     :math:`\Delta\tau_k` in the denominator.
 
