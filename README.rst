@@ -30,15 +30,15 @@ commonly used in physics or biophysics for techniques such as
 Two types of correlations are implemented:
 
 - `ucorrelate <https://pycorrelate.readthedocs.io/en/latest/api.html#pycorrelate.pycorrelate.ucorrelate>`__:
-  the classical text-book linear cross-correlation between two signals
-  defined at **uniformly spaced** intervals.
+  the classical textbook linear cross-correlation between two signals defined at **uniformly-spaced** intervals 
+  (both signals having the same interval size).
   Only positive lags are computed and a max lag can be specified.
   Thanks to the limit in the computed lags, this function can be much faster than
   `numpy.correlate <https://docs.scipy.org/doc/numpy/reference/generated/numpy.correlate.html#numpy.correlate>`__.
 
 - `pcorrelate <https://pycorrelate.readthedocs.io/en/latest/api.html#pycorrelate.pycorrelate.pcorrelate>`__:
   cross-correlation of discrete events
-  in a point-process. In this case input arrays can be timestamps or
+  in a point-process (a series of timestamps). In this case input arrays can be timestamps or
   positions of "events", for example **photon arrival times**.
   This function implements the algorithm in
   `Laurence et al. Optics Letters (2006) <https://doi.org/10.1364/OL.31.000829>`__.
