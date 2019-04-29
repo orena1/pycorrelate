@@ -2,7 +2,9 @@
 Pycorrelate
 ===========
 
-
+.. image:: https://zenodo.org/badge/111135296.svg
+   :target: https://zenodo.org/badge/latestdoi/111135296
+   
 .. image:: https://img.shields.io/pypi/v/pycorrelate.svg
         :target: https://pypi.python.org/pypi/pycorrelate
 
