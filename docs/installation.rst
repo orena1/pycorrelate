@@ -32,13 +32,13 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/tritemio/pycorrelate
+    $ git clone git://github.com/OpenSMFS/pycorrelate
 
 Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl  -OL https://github.com/tritemio/pycorrelate/tarball/master
+    $ curl  -OL https://github.com/OpenSMFS/pycorrelate/tarball/master
 
 Once you have a copy of the source, you can install it with:
 
@@ -47,5 +47,5 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/tritemio/pycorrelate
-.. _tarball: https://github.com/tritemio/pycorrelate/tarball/master
+.. _Github repo: https://github.com/OpenSMFS/pycorrelate
+.. _tarball: https://github.com/OpenSMFS/pycorrelate/tarball/master
